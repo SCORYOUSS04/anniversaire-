@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Joyeux Anniversaire Mon Amour | Lys & Éclats</title>
+    <!-- Google Fonts pour une typographie élégante -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (gratuit) pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        /* Conteneur principal avec effet de verre (glassmorphism) */
+        .birthday-card {
+            position: relative;
+            width: 90%;
+            max-width: 750px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            border-radius: 64px 48px 64px 48px;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.2);
+            padding: 2rem 1.8rem 2.8rem;
+            text-align: center;
+            z-index: 10;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255,215,180,0.4);
+        }
+
+        .birthday-card:hover {
+            transform: scale(1.01);
+        }
+
+        /* Titre principal */
+        .greeting {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.4rem;
+            color: #FFE6C7;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.3), 0 0 8px rgba(255,200,150,0.8);
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .sub {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #FFD9B5;
+            border-top: 1px dashed rgba(255,215,180,0.5);
+            display: inline-block;
+            padding-top: 8px;
+            margin-bottom: 25px;
+        }
+
+        /* Zone des lys */
+        .lily-garden {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 25px 0 20px;
+        }
+
+        .lily {
+            position: relative;
+            width: 100px;
+            height: 130px;
+            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.3));
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            animation: float 4s infinite ease-in-out;
+        }
+
+        .lily:nth-child(2) { animation-delay: 0.6s; }
+        .lily:nth-child(3) { animation-delay: 1.2s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .lily svg {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s;
+        }
+
+        .lily:hover svg {
+            transform: scale(1.05);
+        }
+
+        /* Feux d'artifice */
+        .fireworks-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            overflow: hidden;
+        }
+
+        .firework-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        /* Message spécial */
+        .love-message {
+            background: rgba(0, 0, 0, 0.35);
+            border-radius: 48px;
+            padding: 20px 18px;
+            margin: 30px 0 25px;
+            backdrop-filter: blur(4px);
+            border-left: 5px solid #F4A261;
+            border-right: 5px solid #E9C46A;
+        }
+
+        .love-message p {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: #FFF2E2;
+            line-height: 1.5;
+            letter-spacing: 0.3px;
+        }
+
+        .heart-icon {
+            color: #ff6b6b;
+            font-size: 1.8rem;
+            margin: 0 8px;
+            animation: heartbeat 1.4s infinite;
+            display: inline-block;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); text-shadow: 0 0 8px #ff9f7c; }
+        }
+
+        /* Bouton */
+        .btn-gift {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #F4A261, #E76F51);
+            border: none;
+            padding: 14px 32px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2C1A0E;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.25s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        .btn-gift i {
+            font-size: 1.4rem;
+            transition: transform 0.2s;
+        }
+
+        .btn-gift:hover {
+            transform: translateY(-4px);
+            background: linear-gradient(135deg, #FFB347, #E76F51);
+            box-shadow: 0 18px 28px rgba(0,0,0,0.3);
+        }
+
+        .btn-gift:active {
+            transform: translateY(2px);
+        }
+
+        .footer-note {
+            margin-top: 28px;
+            font-size: 0.7rem;
+            color: rgba(255,235,205,0.7);
+            letter-spacing: 0.5px;
+        }
+
+        /* Popup du cadeau (version améliorée) */
+        .gift-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .gift-popup-content {
+            background: linear-gradient(135deg, #2D2327, #1E191F);
+            border-radius: 48px;
+            max-width: 500px;
+            width: 90%;
+            padding: 40px 30px;
+            text-align: center;
+            border: 2px solid #F4A261;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            position: relative;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .gift-popup-content h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            color: #F4A261;
+            margin-bottom: 20px;
+        }
+
+        .gift-popup-content p {
+            color: #FFE6C7;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+
+        .close-popup {
+            background: #E76F51;
+            border: none;
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2C1A0E;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.2s;
+        }
+
+        .close-popup:hover {
+            background: #F4A261;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 550px) {
+            .birthday-card {
+                padding: 1.2rem 1rem 2rem;
+                width: 95%;
+            }
+            .greeting {
+                font-size: 2.4rem;
+            }
+            .lily {
+                width: 70px;
+            }
+            .love-message p {
+                font-size: 1rem;
+            }
+            .btn-gift {
+                padding: 10px 24px;
+                font-size: 1rem;
+            }
+        }
+
+        .instruction-tip {
+            background: rgba(0,0,0,0.5);
+            display: inline-block;
+            border-radius: 40px;
+            padding: 6px 16px;
+            font-size: 0.75rem;
+            color: #FFE0B5;
+            margin-top: 15px;
+        }
+        .instruction-tip i {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="fireworks-container" id="fireworksContainer"></div>
+
+    <div class="birthday-card">
+        <div class="greeting">
+            Joyeux Anniversaire
+        </div>
+        <div style="font-size: 1.8rem; font-family: 'Great Vibes', cursive; color:#F9D6A4; margin-top: -12px;">
+            mon amour <i class="fas fa-heart" style="color: #ff8080; font-size: 1.5rem;"></i>
+        </div>
+        <div class="sub">— Éclats de lys & étoiles pour toi —</div>
+
+        <div class="lily-garden">
+            <div class="lily">
+                <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 15 L38 48 L50 70 L62 48 L50 15Z" fill="#F7C59F" stroke="#E5A36F" stroke-width="1.2"/>
+                    <path d="M50 15 L30 55 L50 72 L70 55 L50 15Z" fill="#FFDEAD" stroke="#D9895A" stroke-width="0.8"/>
+                    <path d="M50 40 L44 60 L50 75 L56 60 L50 40Z" fill="#FFC28C"/>
+                    <circle cx="50" cy="50" r="6" fill="#F4A261" stroke="#C16F3A" stroke-width="1"/>
+                    <path d="M50 70 L48 95 L52 95 L50 70Z" fill="#5A8F4C"/>
+                    <path d="M44 94 L50 100 L56 94" stroke="#4B6E3B" stroke-width="2" fill="none"/>
+                </svg>
+            </div>
+            <div class="lily">
+                <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 12 L36 46 L50 68 L64 46 L50 12Z" fill="#F2CDA0" stroke="#DE9D6D" stroke-width="1"/>
+                    <path d="M50 12 L28 52 L50 69 L72 52 L50 12Z" fill="#FFE4BC" stroke="#D9834A"/>
+                    <path d="M50 38 L43 58 L50 73 L57 58 L50 38Z" fill="#FFD2A5"/>
+                    <circle cx="50" cy="48" r="7" fill="#E9B47A" stroke="#BE6B3E" stroke-width="1"/>
+                    <path d="M50 68 L46 92 L54 92 L50 68Z" fill="#6A9C4F"/>
+                    <path d="M45 91 L50 97 L55 91" stroke="#4C7538" stroke-width="2" fill="none"/>
+                </svg>
+            </div>
+            <div class="lily">
+                <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 18 L40 50 L50 74 L60 50 L50 18Z" fill="#F5C59E" stroke="#DE9468"/>
+                    <path d="M50 18 L32 56 L50 76 L68 56 L50 18Z" fill="#FFDDAA" stroke="#CA7747"/>
+                    <path d="M50 42 L45 62 L50 77 L55 62 L50 42Z" fill="#FFC48C"/>
+                    <circle cx="50" cy="52" r="5.5" fill="#F0984A" stroke="#BC683C"/>
+                    <path d="M50 72 L47 98 L53 98 L50 72Z" fill="#558B3E"/>
+                    <path d="M48 97 L50 102 L52 97" stroke="#426732" stroke-width="1.8" fill="none"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="love-message">
+            <p>
+                <i class="fas fa-star-of-life" style="color: #F4C542;"></i> 
+                Pour la lumière de ma vie, chaque jour à tes côtés est une mélodie. 
+                Ces lys éclosent pour toi, tout comme mon cœur <span class="heart-icon"><i class="fas fa-heart"></i></span> 
+                ne cesse de battre plus fort pour toi. 
+                Que cette année t'apporte autant de joie que tu m'en donnes. 
+                <i class="fas fa-feather-alt" style="color: #E9C46A;"></i>
+            </p>
+        </div>
+
+        <button id="fireworkButton" class="btn-gift">
+            <i class="fas fa-gift"></i> Ouvre ton cadeau <i class="fas fa-sparkle" style="font-size: 1rem;"></i>
+        </button>
+        <div class="instruction-tip">
+            <i class="fas fa-hand-pointer"></i> Clique sur le bouton pour découvrir ton cadeau et la magie !
+        </div>
+        <div class="footer-note">
+            ✨ Éternellement tien(ne) ✨
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const colors = [
+                '#FFB347', '#FF6F61', '#D96C6C', '#F4A261', '#E9C46A', 
+                '#C77DFF', '#B583FF', '#FFD166', '#FFFFFF', '#FFB5A7', '#FCD5CE'
+            ];
+            
+            const container = document.getElementById('fireworksContainer');
+            const btn = document.getElementById('fireworkButton');
+            
+            function createFireworkParticle(x, y, color, delay = 0) {
+                const particle = document.createElement('div');
+                particle.classList.add('firework-particle');
+                const size = Math.floor(Math.random() * 10) + 5;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.backgroundColor = color;
+                particle.style.boxShadow = `0 0 12px ${color}`;
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.position = 'absolute';
+                
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 100 + 40;
+                const dx = Math.cos(angle) * distance;
+                const dy = Math.sin(angle) * distance - 20;
+                
+                const uniqueId = `part-${Date.now()}-${Math.random()}`;
+                const styleSheet = document.createElement('style');
+                styleSheet.textContent = `
+                    @keyframes burst-${uniqueId} {
+                        0% {
+                            opacity: 1;
+                            transform: translate(0, 0) scale(0.3);
+                        }
+                        25% {
+                            opacity: 1;
+                            transform: translate(${dx * 0.4}px, ${dy * 0.4}px) scale(1);
+                        }
+                        100% {
+                            opacity: 0;
+                            transform: translate(${dx}px, ${dy}px) scale(0.6);
+                        }
+                    }
+                `;
+                document.head.appendChild(styleSheet);
+                particle.style.animation = `burst-${uniqueId} 1.2s ease-out forwards`;
+                container.appendChild(particle);
+                
+                setTimeout(() => {
+                    if(particle && particle.parentNode) particle.remove();
+                    if(styleSheet && styleSheet.parentNode) styleSheet.remove();
+                }, 1300);
+            }
+            
+            function burstFireworkAt(centerX, centerY, intensity = 18) {
+                for(let i = 0; i < intensity; i++) {
+                    const col = colors[Math.floor(Math.random() * colors.length)];
+                    const offsetX = (Math.random() - 0.5) * 28;
+                    const offsetY = (Math.random() - 0.5) * 28;
+                    createFireworkParticle(centerX + offsetX, centerY + offsetY, col);
+                }
+            }
+            
+            function grandFeuArtifice() {
+                const w = window.innerWidth;
+                const h = window.innerHeight;
+                const cardRect = document.querySelector('.birthday-card').getBoundingClientRect();
+                const cardCenterX = cardRect.left + cardRect.width / 2;
+                const cardCenterY = cardRect.top + cardRect.height / 3;
+                burstFireworkAt(cardCenterX, cardCenterY, 24);
+                
+                setTimeout(() => burstFireworkAt(w * 0.2, h * 0.4, 20), 150);
+                setTimeout(() => burstFireworkAt(w * 0.8, h * 0.55, 22), 300);
+                setTimeout(() => burstFireworkAt(w * 0.5, h * 0.2, 20), 450);
+                
+                setTimeout(() => {
+                    const lilyArea = document.querySelector('.lily-garden').getBoundingClientRect();
+                    const lilyX = lilyArea.left + lilyArea.width/2;
+                    const lilyY = lilyArea.top + lilyArea.height/2;
+                    burstFireworkAt(lilyX, lilyY, 28);
+                }, 600);
+                
+                setTimeout(() => {
+                    for(let s=0; s<6; s++) {
+                        burstFireworkAt(Math.random() * w, Math.random() * h * 0.7, 12);
+                    }
+                }, 900);
+            }
+            
+            function showGiftPopup() {
+                // Supprimer une popup existante si besoin
+                const existingPopup = document.querySelector('.gift-popup');
+                if(existingPopup) existingPopup.remove();
+                
+                const popup = document.createElement('div');
+                popup.className = 'gift-popup';
+                popup.innerHTML = `
+                    <div class="gift-popup-content">
+                        <i class="fas fa-envelope-open-text" style="font-size: 4rem; color: #F4A261; margin-bottom: 10px;"></i>
+                        <h2>Pour toi, mon amour ❤️</h2>
+                        <p>
+                            🌸 Chaque jour à tes côtés est un cadeau.<br>
+                            🌷 Que ces lys illuminent ton année.<br>
+                            ✨ Je t'aime plus que tout, aujourd'hui et pour toujours.<br><br>
+                            <strong style="color: #F4A261;">Joyeux Anniversaire, ma femme merveilleuse !</strong>
+                        </p>
+                        <button class="close-popup">Fermer ce message <i class="fas fa-heart"></i></button>
+                    </div>
+                `;
+                document.body.appendChild(popup);
+                
+                const closeBtn = popup.querySelector('.close-popup');
+                closeBtn.addEventListener('click', () => {
+                    popup.remove();
+                });
+                
+                // Fermer en cliquant à l'extérieur
+                popup.addEventListener('click', (e) => {
+                    if(e.target === popup) popup.remove();
+                });
+            }
+            
+            function createHearts() {
+                for(let i=0; i<40; i++) {
+                    const heartSpan = document.createElement('i');
+                    heartSpan.className = 'fas fa-heart';
+                    heartSpan.style.position = 'fixed';
+                    heartSpan.style.left = Math.random() * window.innerWidth + 'px';
+                    heartSpan.style.bottom = '-20px';
+                    heartSpan.style.color = `hsl(${Math.random() * 20 + 340}, 80%, 65%)`;
+                    heartSpan.style.fontSize = (Math.random() * 20 + 12) + 'px';
+                    heartSpan.style.zIndex = '20';
+                    heartSpan.style.pointerEvents = 'none';
+                    heartSpan.style.opacity = '0.9';
+                    heartSpan.style.filter = 'drop-shadow(0 0 4px gold)';
+                    document.body.appendChild(heartSpan);
+                    
+                    const styleHeart = document.createElement('style');
+                    styleHeart.textContent = `
+                        @keyframes floatHeart {
+                            0% { transform: translateY(0) rotate(0deg); opacity: 0.9; }
+                            100% { transform: translateY(-${window.innerHeight + 100}px) rotate(15deg); opacity: 0; }
+                        }
+                    `;
+                    document.head.appendChild(styleHeart);
+                    heartSpan.style.animation = `floatHeart ${Math.random() * 1.5 + 1}s linear forwards`;
+                    
+                    setTimeout(() => {
+                        if(heartSpan && heartSpan.remove) heartSpan.remove();
+                        if(styleHeart && styleHeart.remove) styleHeart.remove();
+                    }, 2000);
+                }
+            }
+            
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                grandFeuArtifice();
+                createHearts();
+                
+                // Afficher la popup cadeau après un court délai (pendant le feu d'artifice)
+                setTimeout(() => {
+                    showGiftPopup();
+                }, 400);
+            });
+            
+            // Petit feu d'artifice d'accueil
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    const w = window.innerWidth;
+                    const h = window.innerHeight;
+                    burstFireworkAt(w/2, h/2.5, 15);
+                }, 300);
+            });
+        })();
+    </script>
+</body>
+</html>
