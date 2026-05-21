@@ -3,550 +3,509 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Joyeux Anniversaire Mon Amour | Lys & Éclats</title>
-    <!-- Google Fonts pour une typographie élégante -->
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome 6 (gratuit) pour les icônes -->
+    <title>Joyeux Anniversaire Mon Amour</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            user-select: none;
         }
 
         body {
             min-height: 100vh;
-            background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Montserrat', sans-serif;
+            background: radial-gradient(ellipse at top, #0a1628, #02050a);
             overflow-x: hidden;
+            font-family: 'Montserrat', sans-serif;
             position: relative;
-            cursor: pointer;
         }
 
-        /* Conteneur principal avec effet de verre (glassmorphism) */
+        /* Étoiles */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 65vh;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.3); }
+        }
+
+        /* Lune réaliste */
+        .moon {
+            position: fixed;
+            top: 60px;
+            right: 70px;
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(circle at 35% 35%, #fffbe0, #ffe8a0);
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(255, 235, 120, 0.5);
+            z-index: 1;
+        }
+        .moon-craters {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 25% 30%, rgba(0,0,0,0.08) 8px, transparent 8px);
+            background-size: 20px 20px;
+        }
+
+        /* Mer réaliste */
+        .ocean {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 42vh;
+            background: linear-gradient(180deg, #0a2f5a, #041a2e);
+            z-index: 1;
+            overflow: hidden;
+        }
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background: repeating-linear-gradient(90deg, 
+                transparent, 
+                transparent 60px, 
+                rgba(80, 160, 240, 0.12) 60px, 
+                rgba(80, 160, 240, 0.12) 120px);
+            animation: waveMove 10s linear infinite;
+        }
+        .wave2 {
+            animation: waveMove 15s linear infinite reverse;
+            opacity: 0.6;
+        }
+        .wave-reflection {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(180deg, transparent, rgba(255, 235, 140, 0.15));
+            pointer-events: none;
+        }
+        @keyframes waveMove {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* Sable réaliste */
+        .sand {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 16vh;
+            background: linear-gradient(180deg, #d4a84b, #9a7628);
+            z-index: 2;
+            border-radius: 50px 50px 0 0;
+            box-shadow: inset 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .sand-texture {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 20% 40%, rgba(0,0,0,0.1) 2px, transparent 2px);
+            background-size: 12px 12px;
+            border-radius: 50px 50px 0 0;
+        }
+        .sand-dunes {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(180deg, transparent, rgba(0,0,0,0.15));
+            border-radius: 0 0 0 0;
+        }
+
+        /* Carte transparente */
         .birthday-card {
             position: relative;
             width: 90%;
-            max-width: 750px;
-            background: rgba(255, 255, 255, 0.12);
+            max-width: 650px;
+            margin: 50px auto;
+            background: rgba(10, 25, 40, 0.55);
             backdrop-filter: blur(12px);
-            border-radius: 64px 48px 64px 48px;
-            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.2);
-            padding: 2rem 1.8rem 2.8rem;
+            border-radius: 56px;
+            padding: 2.2rem 1.8rem;
             text-align: center;
-            z-index: 10;
-            transition: transform 0.3s ease;
-            border: 1px solid rgba(255,215,180,0.4);
+            z-index: 20;
+            border: 1px solid rgba(255, 210, 120, 0.4);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.4);
         }
 
-        .birthday-card:hover {
-            transform: scale(1.01);
-        }
-
-        /* Titre principal */
-        .greeting {
+        /* Titre principal uniquement */
+        .main-title {
             font-family: 'Great Vibes', cursive;
             font-size: 3.4rem;
-            color: #FFE6C7;
-            text-shadow: 0 5px 15px rgba(0,0,0,0.3), 0 0 8px rgba(255,200,150,0.8);
+            color: #ffefc0;
+            text-shadow: 0 0 20px rgba(0,0,0,0.5);
             letter-spacing: 2px;
-            margin-bottom: 0.5rem;
+        }
+        .sub-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+            color: #ffda99;
+            margin-top: -10px;
         }
 
-        .sub {
-            font-size: 1.2rem;
-            font-weight: 300;
-            color: #FFD9B5;
-            border-top: 1px dashed rgba(255,215,180,0.5);
-            display: inline-block;
-            padding-top: 8px;
-            margin-bottom: 25px;
-        }
-
-        /* Zone des lys */
+        /* Lys */
         .lily-garden {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 25px;
             flex-wrap: wrap;
-            margin: 25px 0 20px;
+            margin: 35px 0 25px;
         }
-
         .lily {
-            position: relative;
             width: 100px;
-            height: 130px;
-            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.3));
-            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            animation: float 4s infinite ease-in-out;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
         }
-
-        .lily:nth-child(2) { animation-delay: 0.6s; }
-        .lily:nth-child(3) { animation-delay: 1.2s; }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-            100% { transform: translateY(0px); }
+        .lily:hover {
+            transform: translateY(-5px);
         }
-
         .lily svg {
             width: 100%;
             height: auto;
             transition: transform 0.3s;
         }
 
-        .lily:hover svg {
-            transform: scale(1.05);
+        /* Animation d'ouverture des lys */
+        .lily.open svg {
+            animation: flowerOpen 0.5s ease forwards;
+        }
+        @keyframes flowerOpen {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); filter: drop-shadow(0 0 15px #ffda99); }
+            100% { transform: scale(1.05); opacity: 0.9; }
         }
 
-        /* Feux d'artifice */
-        .fireworks-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 5;
-            overflow: hidden;
-        }
-
-        .firework-particle {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0;
-        }
-
-        /* Message spécial */
-        .love-message {
-            background: rgba(0, 0, 0, 0.35);
-            border-radius: 48px;
-            padding: 20px 18px;
-            margin: 30px 0 25px;
-            backdrop-filter: blur(4px);
-            border-left: 5px solid #F4A261;
-            border-right: 5px solid #E9C46A;
-        }
-
-        .love-message p {
-            font-size: 1.25rem;
-            font-weight: 400;
-            color: #FFF2E2;
-            line-height: 1.5;
-            letter-spacing: 0.3px;
-        }
-
-        .heart-icon {
-            color: #ff6b6b;
-            font-size: 1.8rem;
-            margin: 0 8px;
-            animation: heartbeat 1.4s infinite;
-            display: inline-block;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); text-shadow: 0 0 8px #ff9f7c; }
-        }
-
-        /* Bouton */
+        /* Bouton cadeau */
         .btn-gift {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: linear-gradient(135deg, #F4A261, #E76F51);
+            background: linear-gradient(135deg, #ffb347, #ff8c42);
             border: none;
             padding: 14px 32px;
             font-size: 1.2rem;
             font-weight: 600;
-            color: #2C1A0E;
+            color: #1f2a2e;
             border-radius: 60px;
             cursor: pointer;
-            transition: 0.25s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            text-decoration: none;
+            transition: 0.2s;
+            margin: 15px 0 10px;
             font-family: 'Montserrat', sans-serif;
-            margin-top: 10px;
-            letter-spacing: 1px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
         }
-
-        .btn-gift i {
-            font-size: 1.4rem;
-            transition: transform 0.2s;
-        }
-
         .btn-gift:hover {
-            transform: translateY(-4px);
-            background: linear-gradient(135deg, #FFB347, #E76F51);
-            box-shadow: 0 18px 28px rgba(0,0,0,0.3);
+            transform: scale(1.02);
+            background: linear-gradient(135deg, #ffc25e, #ffa050);
         }
 
-        .btn-gift:active {
-            transform: translateY(2px);
-        }
-
-        .footer-note {
-            margin-top: 28px;
+        .instruction {
+            color: #ffda99;
             font-size: 0.7rem;
-            color: rgba(255,235,205,0.7);
-            letter-spacing: 0.5px;
+            opacity: 0.7;
+            margin-top: 10px;
         }
 
-        /* Popup du cadeau (version améliorée) */
-        .gift-popup {
+        /* Popup fleur (juste animation, pas de texte) */
+        .flower-petal {
+            position: fixed;
+            pointer-events: none;
+            z-index: 100;
+            font-size: 2rem;
+            animation: petalFly 1s ease-out forwards;
+        }
+        @keyframes petalFly {
+            0% { transform: scale(0) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.2) rotate(20deg); opacity: 0.9; }
+            100% { transform: scale(0) rotate(40deg) translateY(-100px); opacity: 0; }
+        }
+
+        /* Popup lettre d'amour */
+        .letter-popup {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.85);
             backdrop-filter: blur(8px);
-            z-index: 1000;
+            z-index: 200;
             display: flex;
             align-items: center;
             justify-content: center;
             animation: fadeIn 0.4s ease;
         }
-
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-
-        .gift-popup-content {
-            background: linear-gradient(135deg, #2D2327, #1E191F);
-            border-radius: 48px;
+        .letter-content {
+            background: linear-gradient(145deg, #fff8e8, #fff0d8);
+            border-radius: 32px;
             max-width: 500px;
             width: 90%;
-            padding: 40px 30px;
+            padding: 35px 28px;
             text-align: center;
-            border: 2px solid #F4A261;
+            border: 2px solid #ffb347;
             box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            position: relative;
             animation: slideUp 0.5s ease;
+            position: relative;
         }
-
         @keyframes slideUp {
             from { transform: translateY(50px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
-
-        .gift-popup-content h2 {
+        .letter-content h2 {
             font-family: 'Great Vibes', cursive;
-            font-size: 2.8rem;
-            color: #F4A261;
-            margin-bottom: 20px;
+            font-size: 2.5rem;
+            color: #c97e2a;
+            margin-bottom: 15px;
         }
-
-        .gift-popup-content p {
-            color: #FFE6C7;
-            font-size: 1.2rem;
-            line-height: 1.6;
+        .letter-content p {
+            color: #5a3a1a;
+            font-size: 1rem;
+            line-height: 1.7;
+            text-align: left;
             margin: 20px 0;
         }
-
-        .close-popup {
-            background: #E76F51;
+        .close-letter {
+            background: #ffb347;
             border: none;
             padding: 10px 28px;
             border-radius: 40px;
             font-size: 1rem;
             font-weight: 600;
-            color: #2C1A0E;
+            color: #2c1a0e;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 10px;
             transition: 0.2s;
         }
-
-        .close-popup:hover {
-            background: #F4A261;
-            transform: scale(1.05);
+        .close-letter:hover {
+            background: #ffc864;
+            transform: scale(1.02);
+        }
+        .seal {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            font-size: 2rem;
+            color: #ffb347;
         }
 
-        @media (max-width: 550px) {
-            .birthday-card {
-                padding: 1.2rem 1rem 2rem;
-                width: 95%;
-            }
-            .greeting {
-                font-size: 2.4rem;
-            }
-            .lily {
-                width: 70px;
-            }
-            .love-message p {
-                font-size: 1rem;
-            }
-            .btn-gift {
-                padding: 10px 24px;
-                font-size: 1rem;
-            }
+        /* Feux d'artifice */
+        .firework-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 150;
         }
 
-        .instruction-tip {
-            background: rgba(0,0,0,0.5);
-            display: inline-block;
-            border-radius: 40px;
-            padding: 6px 16px;
-            font-size: 0.75rem;
-            color: #FFE0B5;
-            margin-top: 15px;
-        }
-        .instruction-tip i {
-            margin-right: 5px;
+        @media (max-width: 600px) {
+            .lily { width: 75px; }
+            .main-title { font-size: 2.2rem; }
+            .sub-title { font-size: 1.3rem; }
+            .birthday-card { padding: 1.5rem; margin: 30px auto; }
+            .letter-content p { font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
-
-    <div class="fireworks-container" id="fireworksContainer"></div>
+    <div class="stars" id="stars"></div>
+    <div class="moon"><div class="moon-craters"></div></div>
+    <div class="ocean">
+        <div class="wave"></div>
+        <div class="wave wave2"></div>
+        <div class="wave-reflection"></div>
+    </div>
+    <div class="sand">
+        <div class="sand-texture"></div>
+        <div class="sand-dunes"></div>
+    </div>
 
     <div class="birthday-card">
-        <div class="greeting">
-            Joyeux Anniversaire
-        </div>
-        <div style="font-size: 1.8rem; font-family: 'Great Vibes', cursive; color:#F9D6A4; margin-top: -12px;">
-            mon amour <i class="fas fa-heart" style="color: #ff8080; font-size: 1.5rem;"></i>
-        </div>
-        <div class="sub">— Éclats de lys & étoiles pour toi —</div>
+        <div class="main-title">Joyeux Anniversaire</div>
+        <div class="sub-title">mon amour <i class="fas fa-heart" style="color: #ff8080; font-size: 1.3rem;"></i></div>
 
         <div class="lily-garden">
-            <div class="lily">
-                <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M50 15 L38 48 L50 70 L62 48 L50 15Z" fill="#F7C59F" stroke="#E5A36F" stroke-width="1.2"/>
-                    <path d="M50 15 L30 55 L50 72 L70 55 L50 15Z" fill="#FFDEAD" stroke="#D9895A" stroke-width="0.8"/>
-                    <path d="M50 40 L44 60 L50 75 L56 60 L50 40Z" fill="#FFC28C"/>
-                    <circle cx="50" cy="50" r="6" fill="#F4A261" stroke="#C16F3A" stroke-width="1"/>
-                    <path d="M50 70 L48 95 L52 95 L50 70Z" fill="#5A8F4C"/>
-                    <path d="M44 94 L50 100 L56 94" stroke="#4B6E3B" stroke-width="2" fill="none"/>
+            <!-- Lys 1 -->
+            <div class="lily" data-flower="blanc">
+                <svg viewBox="0 0 100 120" fill="none">
+                    <defs>
+                        <radialGradient id="petal1" cx="50%" cy="30%"><stop offset="0%" stop-color="#fff8f0"/><stop offset="70%" stop-color="#f5d0a9"/><stop offset="100%" stop-color="#e0a875"/></radialGradient>
+                    </defs>
+                    <path d="M50 12 C35 38 28 60 50 78 C72 60 65 38 50 12Z" fill="url(#petal1)" stroke="#c77a3a" stroke-width="0.8"/>
+                    <path d="M50 12 C22 50 20 72 50 82 C80 72 78 50 50 12Z" fill="#fff0e0" stroke="#b8682a" stroke-width="0.6" opacity="0.85"/>
+                    <path d="M50 42 C45 56 44 68 50 74 C56 68 55 56 50 42Z" fill="#ffe0b8" stroke="#d48a4a"/>
+                    <circle cx="50" cy="52" r="6" fill="#e8a060" stroke="#b86030" stroke-width="0.8"/>
+                    <circle cx="50" cy="52" r="3" fill="#cc8040"/>
+                    <path d="M50 74 L48 98 L52 98 Z" fill="#5a8a40"/>
                 </svg>
             </div>
-            <div class="lily">
-                <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M50 12 L36 46 L50 68 L64 46 L50 12Z" fill="#F2CDA0" stroke="#DE9D6D" stroke-width="1"/>
-                    <path d="M50 12 L28 52 L50 69 L72 52 L50 12Z" fill="#FFE4BC" stroke="#D9834A"/>
-                    <path d="M50 38 L43 58 L50 73 L57 58 L50 38Z" fill="#FFD2A5"/>
-                    <circle cx="50" cy="48" r="7" fill="#E9B47A" stroke="#BE6B3E" stroke-width="1"/>
-                    <path d="M50 68 L46 92 L54 92 L50 68Z" fill="#6A9C4F"/>
-                    <path d="M45 91 L50 97 L55 91" stroke="#4C7538" stroke-width="2" fill="none"/>
+            <!-- Lys 2 -->
+            <div class="lily" data-flower="rose">
+                <svg viewBox="0 0 100 120" fill="none">
+                    <defs>
+                        <radialGradient id="petal2" cx="50%" cy="30%"><stop offset="0%" stop-color="#fff0f0"/><stop offset="70%" stop-color="#f0b8b0"/><stop offset="100%" stop-color="#d88878"/></radialGradient>
+                    </defs>
+                    <path d="M50 14 C38 40 30 62 50 80 C70 62 62 40 50 14Z" fill="url(#petal2)" stroke="#c86858" stroke-width="0.8"/>
+                    <path d="M50 14 C25 52 22 74 50 84 C78 74 75 52 50 14Z" fill="#ffe8e0" stroke="#a85848" stroke-width="0.6" opacity="0.85"/>
+                    <path d="M50 44 C46 58 45 70 50 76 C55 70 54 58 50 44Z" fill="#ffd8c8" stroke="#d87868"/>
+                    <circle cx="50" cy="54" r="5.5" fill="#e89070" stroke="#b85848" stroke-width="0.8"/>
+                    <path d="M50 76 L48 100 L52 100 Z" fill="#5a8a40"/>
                 </svg>
             </div>
-            <div class="lily">
-                <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M50 18 L40 50 L50 74 L60 50 L50 18Z" fill="#F5C59E" stroke="#DE9468"/>
-                    <path d="M50 18 L32 56 L50 76 L68 56 L50 18Z" fill="#FFDDAA" stroke="#CA7747"/>
-                    <path d="M50 42 L45 62 L50 77 L55 62 L50 42Z" fill="#FFC48C"/>
-                    <circle cx="50" cy="52" r="5.5" fill="#F0984A" stroke="#BC683C"/>
-                    <path d="M50 72 L47 98 L53 98 L50 72Z" fill="#558B3E"/>
-                    <path d="M48 97 L50 102 L52 97" stroke="#426732" stroke-width="1.8" fill="none"/>
+            <!-- Lys 3 -->
+            <div class="lily" data-flower="dore">
+                <svg viewBox="0 0 100 120" fill="none">
+                    <defs>
+                        <radialGradient id="petal3" cx="50%" cy="30%"><stop offset="0%" stop-color="#fff4d8"/><stop offset="70%" stop-color="#f0c080"/><stop offset="100%" stop-color="#d89848"/></radialGradient>
+                    </defs>
+                    <path d="M50 16 C40 42 32 64 50 82 C68 64 60 42 50 16Z" fill="url(#petal3)" stroke="#c87838" stroke-width="0.8"/>
+                    <path d="M50 16 C28 54 26 76 50 86 C74 76 72 54 50 16Z" fill="#fff0c0" stroke="#b06828" stroke-width="0.6" opacity="0.85"/>
+                    <path d="M50 46 C46 60 45 72 50 78 C55 72 54 60 50 46Z" fill="#ffe0a0" stroke="#d08848"/>
+                    <circle cx="50" cy="56" r="5" fill="#e8a050" stroke="#c07030" stroke-width="0.8"/>
+                    <path d="M50 78 L48 102 L52 102 Z" fill="#5a8a40"/>
                 </svg>
             </div>
         </div>
 
-        <div class="love-message">
-            <p>
-                <i class="fas fa-star-of-life" style="color: #F4C542;"></i> 
-                Pour la lumière de ma vie, chaque jour à tes côtés est une mélodie. 
-                Ces lys éclosent pour toi, tout comme mon cœur <span class="heart-icon"><i class="fas fa-heart"></i></span> 
-                ne cesse de battre plus fort pour toi. 
-                Que cette année t'apporte autant de joie que tu m'en donnes. 
-                <i class="fas fa-feather-alt" style="color: #E9C46A;"></i>
-            </p>
-        </div>
-
-        <button id="fireworkButton" class="btn-gift">
-            <i class="fas fa-gift"></i> Ouvre ton cadeau <i class="fas fa-sparkle" style="font-size: 1rem;"></i>
-        </button>
-        <div class="instruction-tip">
-            <i class="fas fa-hand-pointer"></i> Clique sur le bouton pour découvrir ton cadeau et la magie !
-        </div>
-        <div class="footer-note">
-            ✨ Éternellement tien(ne) ✨
-        </div>
+        <button id="giftBtn" class="btn-gift"><i class="fas fa-gift"></i> Ouvre ton cadeau</button>
+        <div class="instruction">✨ Clique sur les lys pour les faire s'ouvrir ✨</div>
     </div>
 
     <script>
-        (function() {
-            const colors = [
-                '#FFB347', '#FF6F61', '#D96C6C', '#F4A261', '#E9C46A', 
-                '#C77DFF', '#B583FF', '#FFD166', '#FFFFFF', '#FFB5A7', '#FCD5CE'
-            ];
-            
-            const container = document.getElementById('fireworksContainer');
-            const btn = document.getElementById('fireworkButton');
-            
-            function createFireworkParticle(x, y, color, delay = 0) {
-                const particle = document.createElement('div');
-                particle.classList.add('firework-particle');
-                const size = Math.floor(Math.random() * 10) + 5;
-                particle.style.width = size + 'px';
-                particle.style.height = size + 'px';
-                particle.style.backgroundColor = color;
-                particle.style.boxShadow = `0 0 12px ${color}`;
-                particle.style.left = x + 'px';
-                particle.style.top = y + 'px';
-                particle.style.position = 'absolute';
-                
-                const angle = Math.random() * Math.PI * 2;
-                const distance = Math.random() * 100 + 40;
-                const dx = Math.cos(angle) * distance;
-                const dy = Math.sin(angle) * distance - 20;
-                
-                const uniqueId = `part-${Date.now()}-${Math.random()}`;
-                const styleSheet = document.createElement('style');
-                styleSheet.textContent = `
-                    @keyframes burst-${uniqueId} {
-                        0% {
-                            opacity: 1;
-                            transform: translate(0, 0) scale(0.3);
-                        }
-                        25% {
-                            opacity: 1;
-                            transform: translate(${dx * 0.4}px, ${dy * 0.4}px) scale(1);
-                        }
-                        100% {
-                            opacity: 0;
-                            transform: translate(${dx}px, ${dy}px) scale(0.6);
-                        }
-                    }
-                `;
-                document.head.appendChild(styleSheet);
-                particle.style.animation = `burst-${uniqueId} 1.2s ease-out forwards`;
-                container.appendChild(particle);
-                
-                setTimeout(() => {
-                    if(particle && particle.parentNode) particle.remove();
-                    if(styleSheet && styleSheet.parentNode) styleSheet.remove();
-                }, 1300);
+        (function(){
+            // === ÉTOILES ===
+            for(let i=0;i<200;i++){
+                let star = document.createElement('div');
+                star.className = 'star';
+                let size = Math.random()*3 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 55 + '%';
+                star.style.animationDelay = Math.random() * 5 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+                document.getElementById('stars').appendChild(star);
             }
-            
-            function burstFireworkAt(centerX, centerY, intensity = 18) {
-                for(let i = 0; i < intensity; i++) {
-                    const col = colors[Math.floor(Math.random() * colors.length)];
-                    const offsetX = (Math.random() - 0.5) * 28;
-                    const offsetY = (Math.random() - 0.5) * 28;
-                    createFireworkParticle(centerX + offsetX, centerY + offsetY, col);
+
+            // === LYS : s'ouvrent au clic (animation + pétales qui volent, PAS de texte) ===
+            const lilies = document.querySelectorAll('.lily');
+            lilies.forEach(lily => {
+                lily.addEventListener('click', function(e){
+                    e.stopPropagation();
+                    // Animation d'ouverture
+                    this.classList.add('open');
+                    // Créer des pétales qui volent
+                    for(let i=0; i<12; i++){
+                        let petal = document.createElement('div');
+                        petal.className = 'flower-petal';
+                        petal.innerHTML = '🌸';
+                        petal.style.left = (e.clientX + (Math.random() - 0.5) * 60) + 'px';
+                        petal.style.top = (e.clientY + (Math.random() - 0.5) * 40) + 'px';
+                        petal.style.fontSize = (Math.random() * 18 + 14) + 'px';
+                        petal.style.transform = `rotate(${Math.random() * 360}deg)`;
+                        document.body.appendChild(petal);
+                        setTimeout(() => petal.remove(), 1000);
+                    }
+                    // Enlever la classe après animation
+                    setTimeout(() => this.classList.remove('open'), 500);
+                });
+            });
+
+            // === FEUX D'ARTIFICE ===
+            function burst(x, y){
+                const colors = ['#ffd966','#ffb347','#6ec8e0','#fff5cc','#ffa0a0','#f0c0a0','#c0e0ff','#ffc878'];
+                for(let i=0;i<50;i++){
+                    let angle = Math.random() * Math.PI * 2;
+                    let speed = Math.random() * 5 + 2;
+                    let vx = Math.cos(angle) * speed * 45;
+                    let vy = Math.sin(angle) * speed * 45 - 35;
+                    let col = colors[Math.floor(Math.random()*colors.length)];
+                    let part = document.createElement('div');
+                    part.className = 'firework-particle';
+                    let sz = Math.random()*8+4;
+                    part.style.cssText = `left:${x}px;top:${y}px;width:${sz}px;height:${sz}px;background:${col};border-radius:50%;box-shadow:0 0 12px ${col};opacity:1;`;
+                    document.body.appendChild(part);
+                    let start = performance.now();
+                    function animate(now){
+                        let dt = (now - start)/1000;
+                        if(dt>1.3){ part.remove(); return; }
+                        let nx = x + vx * dt;
+                        let ny = y + vy * dt + 70 * dt * dt;
+                        part.style.left = nx + 'px';
+                        part.style.top = ny + 'px';
+                        part.style.opacity = 1 - dt/1.3;
+                        requestAnimationFrame(animate);
+                    }
+                    requestAnimationFrame(animate);
                 }
             }
-            
-            function grandFeuArtifice() {
-                const w = window.innerWidth;
-                const h = window.innerHeight;
-                const cardRect = document.querySelector('.birthday-card').getBoundingClientRect();
-                const cardCenterX = cardRect.left + cardRect.width / 2;
-                const cardCenterY = cardRect.top + cardRect.height / 3;
-                burstFireworkAt(cardCenterX, cardCenterY, 24);
-                
-                setTimeout(() => burstFireworkAt(w * 0.2, h * 0.4, 20), 150);
-                setTimeout(() => burstFireworkAt(w * 0.8, h * 0.55, 22), 300);
-                setTimeout(() => burstFireworkAt(w * 0.5, h * 0.2, 20), 450);
-                
-                setTimeout(() => {
-                    const lilyArea = document.querySelector('.lily-garden').getBoundingClientRect();
-                    const lilyX = lilyArea.left + lilyArea.width/2;
-                    const lilyY = lilyArea.top + lilyArea.height/2;
-                    burstFireworkAt(lilyX, lilyY, 28);
-                }, 600);
-                
-                setTimeout(() => {
-                    for(let s=0; s<6; s++) {
-                        burstFireworkAt(Math.random() * w, Math.random() * h * 0.7, 12);
-                    }
-                }, 900);
+
+            function showFireworks(){
+                let w = window.innerWidth;
+                let h = window.innerHeight;
+                burst(w/2, h/2.5);
+                setTimeout(()=>burst(w/3, h/3), 150);
+                setTimeout(()=>burst(2*w/3, h/3), 150);
+                setTimeout(()=>burst(w/4, h/2.5), 350);
+                setTimeout(()=>burst(3*w/4, h/2.5), 350);
+                setTimeout(()=>burst(w/2, h/2), 550);
+                setTimeout(()=>burst(w/2, h/3.5), 750);
+                setTimeout(()=>burst(w/2, h/2.8), 950);
             }
-            
-            function showGiftPopup() {
-                // Supprimer une popup existante si besoin
-                const existingPopup = document.querySelector('.gift-popup');
-                if(existingPopup) existingPopup.remove();
-                
-                const popup = document.createElement('div');
-                popup.className = 'gift-popup';
+
+            // === LETTRE D'AMOUR (apparaît après le cadeau) ===
+            function showLoveLetter(){
+                let popup = document.createElement('div');
+                popup.className = 'letter-popup';
                 popup.innerHTML = `
-                    <div class="gift-popup-content">
-                        <i class="fas fa-envelope-open-text" style="font-size: 4rem; color: #F4A261; margin-bottom: 10px;"></i>
-                        <h2>Pour toi, mon amour ❤️</h2>
+                    <div class="letter-content">
+                        <div class="seal"><i class="fas fa-heart"></i></div>
+                        <h2>À mon amour</h2>
                         <p>
-                            🌸 Chaque jour à tes côtés est un cadeau.<br>
-                            🌷 Que ces lys illuminent ton année.<br>
-                            ✨ Je t'aime plus que tout, aujourd'hui et pour toujours.<br><br>
-                            <strong style="color: #F4A261;">Joyeux Anniversaire, ma femme merveilleuse !</strong>
+                            Ma douce étoile,<br><br>
+                            Ce soir, la mer est calme, le sable est doux, et chaque vague murmure ton nom. 
+                            Je voulais que ce cadeau te rappelle à quel point tu es précieuse à mes yeux. 
+                            Tu es comme ce lys qui s'ouvre à la lumière, belle, unique et éternelle.<br><br>
+                            Merci pour chaque sourire, chaque regard, chaque instant partagé. 
+                            Faire ta vie à tes côtés est le plus beau des voyages.<br><br>
+                            Je t'aime plus que les vagues n'aiment l'océan, plus que les étoiles n'aiment la nuit.<br><br>
+                            <strong style="color:#c97e2a;">Joyeux Anniversaire, mon amour.</strong><br>
+                            Pour toujours,<br>
+                            <span style="font-family:'Great Vibes'; font-size:1.5rem;">Celui qui t'aime</span>
                         </p>
-                        <button class="close-popup">Fermer ce message <i class="fas fa-heart"></i></button>
+                        <button class="close-letter">Fermer <i class="fas fa-heart"></i></button>
                     </div>
                 `;
                 document.body.appendChild(popup);
-                
-                const closeBtn = popup.querySelector('.close-popup');
-                closeBtn.addEventListener('click', () => {
-                    popup.remove();
-                });
-                
-                // Fermer en cliquant à l'extérieur
-                popup.addEventListener('click', (e) => {
-                    if(e.target === popup) popup.remove();
-                });
+                popup.querySelector('.close-letter').onclick = () => popup.remove();
+                popup.onclick = (e) => { if(e.target === popup) popup.remove(); };
             }
-            
-            function createHearts() {
-                for(let i=0; i<40; i++) {
-                    const heartSpan = document.createElement('i');
-                    heartSpan.className = 'fas fa-heart';
-                    heartSpan.style.position = 'fixed';
-                    heartSpan.style.left = Math.random() * window.innerWidth + 'px';
-                    heartSpan.style.bottom = '-20px';
-                    heartSpan.style.color = `hsl(${Math.random() * 20 + 340}, 80%, 65%)`;
-                    heartSpan.style.fontSize = (Math.random() * 20 + 12) + 'px';
-                    heartSpan.style.zIndex = '20';
-                    heartSpan.style.pointerEvents = 'none';
-                    heartSpan.style.opacity = '0.9';
-                    heartSpan.style.filter = 'drop-shadow(0 0 4px gold)';
-                    document.body.appendChild(heartSpan);
-                    
-                    const styleHeart = document.createElement('style');
-                    styleHeart.textContent = `
-                        @keyframes floatHeart {
-                            0% { transform: translateY(0) rotate(0deg); opacity: 0.9; }
-                            100% { transform: translateY(-${window.innerHeight + 100}px) rotate(15deg); opacity: 0; }
-                        }
-                    `;
-                    document.head.appendChild(styleHeart);
-                    heartSpan.style.animation = `floatHeart ${Math.random() * 1.5 + 1}s linear forwards`;
-                    
-                    setTimeout(() => {
-                        if(heartSpan && heartSpan.remove) heartSpan.remove();
-                        if(styleHeart && styleHeart.remove) styleHeart.remove();
-                    }, 2000);
-                }
-            }
-            
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                grandFeuArtifice();
-                createHearts();
-                
-                // Afficher la popup cadeau après un court délai (pendant le feu d'artifice)
-                setTimeout(() => {
-                    showGiftPopup();
-                }, 400);
-            });
-            
-            // Petit feu d'artifice d'accueil
-            window.addEventListener('load', () => {
-                setTimeout(() => {
-                    const w = window.innerWidth;
-                    const h = window.innerHeight;
-                    burstFireworkAt(w/2, h/2.5, 15);
-                }, 300);
+
+            // === BOUTON CADEAU ===
+            document.getElementById('giftBtn').addEventListener('click', function(){
+                showFireworks();
+                setTimeout(() => showLoveLetter(), 600);
             });
         })();
     </script>
