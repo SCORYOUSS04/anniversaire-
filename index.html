@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joyeux Anniversaire ❤️</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    overflow:hidden;
+    height:100vh;
+    background:black;
+}
+
+.container{
+    position:relative;
+    width:100%;
+    height:100vh;
+}
+
+/* IMAGE */
+.bg{
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* OVERLAY */
+.overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.35);
+}
+
+/* CONTENU */
+.center{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    z-index:2;
+}
+
+.center h1{
+    color:white;
+    font-size:3rem;
+    margin-bottom:25px;
+    text-shadow:0 0 15px black;
+}
+
+/* BOUTON */
+button{
+    padding:16px 38px;
+    border:none;
+    border-radius:50px;
+    background:#ff4d6d;
+    color:white;
+    font-size:1.1rem;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.08);
+}
+
+/* LETTRE */
+.letter{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) scale(0);
+    width:90%;
+    max-width:700px;
+    background:white;
+    padding:40px;
+    border-radius:25px;
+    z-index:10;
+    transition:0.5s;
+    box-shadow:0 0 40px rgba(0,0,0,0.5);
+}
+
+.letter.show{
+    transform:translate(-50%,-50%) scale(1);
+}
+
+.letter h2{
+    color:#ff4d6d;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.letter p{
+    color:#333;
+    line-height:1.9;
+    font-size:1.1rem;
+}
+
+.close{
+    position:absolute;
+    top:15px;
+    right:20px;
+    font-size:24px;
+    cursor:pointer;
+}
+
+/* COEURS */
+.heart{
+    position:absolute;
+    bottom:-50px;
+    color:#ff4d6d;
+    animation:float linear infinite;
+}
+
+@keyframes float{
+
+    from{
+        transform:translateY(0);
+        opacity:1;
+    }
+
+    to{
+        transform:translateY(-120vh);
+        opacity:0;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- IMAGE -->
+    <img src="./a_pixel_art_8_bit_style_romantic_nighttime_scene.png" class="bg">
+
+    <div class="overlay"></div>
+
+    <!-- TEXTE -->
+    <div class="center">
+
+        <h1>Joyeux Anniversaire Mon Amour ❤️</h1>
+
+        <button onclick="openLetter()">
+            Ouvrir la lettre 💌
+        </button>
+
+    </div>
+
+    <!-- LETTRE -->
+    <div class="letter" id="letter">
+
+        <div class="close" onclick="closeLetter()">✖</div>
+
+        <h2>Pour Toi ❤️</h2>
+
+        <p>
+            Joyeux anniversaire mon amour ❤️
+            <br><br>
+
+            Aujourd’hui est un jour très spécial parce que la plus belle personne de ma vie fête son anniversaire.
+            <br><br>
+
+            Merci pour ton sourire, ton amour, ta douceur et tous les moments magnifiques qu’on partage ensemble.
+            <br><br>
+
+            Tu rends ma vie plus belle chaque jour et je suis tellement heureux de t’avoir dans ma vie.
+            <br><br>
+
+            Peu importe le temps qui passe, je tomberai toujours amoureux de toi encore et encore ❤️
+            <br><br>
+
+            Je t’aime infiniment 💖
+        </p>
+
+    </div>
+
+</div>
+
+<script>
+
+function openLetter(){
+    document.getElementById("letter").classList.add("show");
+}
+
+function closeLetter(){
+    document.getElementById("letter").classList.remove("show");
+}
+
+/* COEURS */
+for(let i=0;i<40;i++){
+
+    let heart=document.createElement("div");
+
+    heart.classList.add("heart");
+
+    heart.innerHTML="❤️";
+
+    heart.style.left=Math.random()*100+"vw";
+
+    heart.style.fontSize=(Math.random()*25+10)+"px";
+
+    heart.style.animationDuration=(Math.random()*5+5)+"s";
+
+    document.body.appendChild(heart);
+}
+
+</script>
+
+</body>
+</html>
