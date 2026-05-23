@@ -1,221 +1,216 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Joyeux Anniversaire ❤️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyeux Anniversaire ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
-<style>
+        body {
+            overflow: hidden;
+            height: 100vh;
+            background: black;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-}
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
 
-body{
-    overflow:hidden;
-    height:100vh;
-    background:black;
-}
+        /* IMAGE - maintenant elle s'adapte PARFAITEMENT */
+        .bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;  /* L'image couvre tout l'écran sans déformer */
+            object-position: center;  /* Centre l'image */
+        }
 
-.container{
-    position:relative;
-    width:100%;
-    height:100vh;
-}
+        /* OVERLAY */
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+        }
 
-/* IMAGE */
-.bg{
-    position:absolute;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
+        /* CONTENU */
+        .center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2;
+            width: 90%;
+        }
 
-/* OVERLAY */
-.overlay{
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,0.35);
-}
+        .center h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 25px;
+            text-shadow: 0 0 15px black;
+        }
 
-/* CONTENU */
-.center{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    text-align:center;
-    z-index:2;
-}
+        /* BOUTON */
+        button {
+            padding: 16px 38px;
+            border: none;
+            border-radius: 50px;
+            background: #ff4d6d;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-.center h1{
-    color:white;
-    font-size:3rem;
-    margin-bottom:25px;
-    text-shadow:0 0 15px black;
-}
+        button:hover {
+            transform: scale(1.08);
+        }
 
-/* BOUTON */
-button{
-    padding:16px 38px;
-    border:none;
-    border-radius:50px;
-    background:#ff4d6d;
-    color:white;
-    font-size:1.1rem;
-    cursor:pointer;
-    transition:0.3s;
-}
+        /* LETTRE */
+        .letter {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 90%;
+            max-width: 700px;
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            z-index: 10;
+            transition: 0.5s;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+        }
 
-button:hover{
-    transform:scale(1.08);
-}
+        .letter.show {
+            transform: translate(-50%, -50%) scale(1);
+        }
 
-/* LETTRE */
-.letter{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%) scale(0);
-    width:90%;
-    max-width:700px;
-    background:white;
-    padding:40px;
-    border-radius:25px;
-    z-index:10;
-    transition:0.5s;
-    box-shadow:0 0 40px rgba(0,0,0,0.5);
-}
+        .letter h2 {
+            color: #ff4d6d;
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-.letter.show{
-    transform:translate(-50%,-50%) scale(1);
-}
+        .letter p {
+            color: #333;
+            line-height: 1.9;
+            font-size: 1.1rem;
+        }
 
-.letter h2{
-    color:#ff4d6d;
-    text-align:center;
-    margin-bottom:20px;
-}
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+        }
 
-.letter p{
-    color:#333;
-    line-height:1.9;
-    font-size:1.1rem;
-}
+        /* COEURS */
+        .heart {
+            position: absolute;
+            bottom: -50px;
+            color: #ff4d6d;
+            animation: float linear infinite;
+        }
 
-.close{
-    position:absolute;
-    top:15px;
-    right:20px;
-    font-size:24px;
-    cursor:pointer;
-}
+        @keyframes float {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-120vh);
+                opacity: 0;
+            }
+        }
 
-/* COEURS */
-.heart{
-    position:absolute;
-    bottom:-50px;
-    color:#ff4d6d;
-    animation:float linear infinite;
-}
-
-@keyframes float{
-
-    from{
-        transform:translateY(0);
-        opacity:1;
-    }
-
-    to{
-        transform:translateY(-120vh);
-        opacity:0;
-    }
-}
-
-</style>
+        /* RESPONSIVE pour petits écrans */
+        @media (max-width: 600px) {
+            .center h1 {
+                font-size: 1.8rem;
+            }
+            button {
+                padding: 12px 28px;
+                font-size: 0.9rem;
+            }
+            .letter {
+                padding: 25px;
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+            .letter p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
 <div class="container">
 
-    <!-- IMAGE -->
-    <img src="./a_pixel_art_8_bit_style_romantic_nighttime_scene.png" class="bg">
+    <!-- IMAGE - Remplace le chemin par ta propre image -->
+    <!-- Option 1 : Si ton image est dans le même dossier, mets juste le nom -->
+    <!-- Option 2 : Si tu as une image en ligne, mets le lien complet -->
+    <img src="a_pixel_art_8_bit_style_romantic_nighttime_scene.png" class="bg" alt="Romantic night">
 
     <div class="overlay"></div>
 
     <!-- TEXTE -->
     <div class="center">
-
         <h1>Joyeux Anniversaire Mon Amour ❤️</h1>
-
-        <button onclick="openLetter()">
-            Ouvrir la lettre 💌
-        </button>
-
+        <button onclick="openLetter()">Ouvrir la lettre 💌</button>
     </div>
 
     <!-- LETTRE -->
     <div class="letter" id="letter">
-
         <div class="close" onclick="closeLetter()">✖</div>
-
         <h2>Pour Toi ❤️</h2>
-
         <p>
             Joyeux anniversaire mon amour ❤️
             <br><br>
-
             Aujourd’hui est un jour très spécial parce que la plus belle personne de ma vie fête son anniversaire.
             <br><br>
-
             Merci pour ton sourire, ton amour, ta douceur et tous les moments magnifiques qu’on partage ensemble.
             <br><br>
-
             Tu rends ma vie plus belle chaque jour et je suis tellement heureux de t’avoir dans ma vie.
             <br><br>
-
             Peu importe le temps qui passe, je tomberai toujours amoureux de toi encore et encore ❤️
             <br><br>
-
             Je t’aime infiniment 💖
         </p>
-
     </div>
-
 </div>
 
 <script>
+    function openLetter() {
+        document.getElementById("letter").classList.add("show");
+    }
 
-function openLetter(){
-    document.getElementById("letter").classList.add("show");
-}
+    function closeLetter() {
+        document.getElementById("letter").classList.remove("show");
+    }
 
-function closeLetter(){
-    document.getElementById("letter").classList.remove("show");
-}
-
-/* COEURS */
-for(let i=0;i<40;i++){
-
-    let heart=document.createElement("div");
-
-    heart.classList.add("heart");
-
-    heart.innerHTML="❤️";
-
-    heart.style.left=Math.random()*100+"vw";
-
-    heart.style.fontSize=(Math.random()*25+10)+"px";
-
-    heart.style.animationDuration=(Math.random()*5+5)+"s";
-
-    document.body.appendChild(heart);
-}
-
+    /* COEURS QUI TOMBENT */
+    for (let i = 0; i < 40; i++) {
+        let heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 25 + 10) + "px";
+        heart.style.animationDuration = (Math.random() * 5 + 5) + "s";
+        heart.style.animationDelay = (Math.random() * 5) + "s";
+        document.body.appendChild(heart);
+    }
 </script>
 
 </body>
