@@ -30,8 +30,9 @@ body{
     position:absolute;
     width:100%;
     height:100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
+    background:black;
 }
 
 /* OVERLAY */
@@ -161,56 +162,61 @@ button:hover{
     }
 }
 
+/* Lecteur musique */
+.music-player{
+    position:fixed;
+    bottom:20px;
+    left:20px;
+    z-index:20;
+    background:rgba(0,0,0,0.7);
+    backdrop-filter:blur(10px);
+    border-radius:50px;
+    padding:10px 20px;
+    border:1px solid #C0C0C0;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    cursor:pointer;
+    transition:0.3s;
+}
+.music-player:hover{
+    background:rgba(50,50,50,0.8);
+    transform:scale(1.02);
+}
+.music-player span{
+    color:#E0E0E0;
+    font-size:0.9rem;
+}
+.music-player .icon{
+    font-size:1.2rem;
+}
+
 /* RESPONSIVE */
 @media (max-width: 600px) {
-    .center {
-        top: 22%;
-    }
-    .center h1 {
-        font-size: 1.4rem;
-    }
-    button {
-        padding: 8px 20px;
-        font-size: 0.8rem;
-    }
-    .letter {
-        padding: 20px;
-        max-height: 80vh;
-        overflow-y: auto;
-    }
-    .letter p {
-        font-size: 0.85rem;
-    }
-    .letter h2 {
-        font-size: 1.3rem;
-    }
+    .center{top:22%;}
+    .center h1{font-size:1.4rem;}
+    button{padding:8px 20px;font-size:0.8rem;}
+    .letter{padding:20px;max-height:80vh;overflow-y:auto;}
+    .letter p{font-size:0.85rem;}
+    .letter h2{font-size:1.3rem;}
+    .music-player{padding:6px 14px;}
+    .music-player span{font-size:0.7rem;}
 }
-
 @media (min-width: 1200px) {
-    .center {
-        top: 28%;
-    }
-    .center h1 {
-        font-size: 3rem;
-    }
+    .center{top:28%;}
+    .center h1{font-size:3rem;}
 }
-
 </style>
 </head>
-
 <body>
 
 <div class="container">
-
     <img src="./a_pixel_art_8_bit_style_romantic_nighttime_scene.png" class="bg" alt="Romantic night">
-
     <div class="overlay"></div>
-
     <div class="center">
         <h1>Happy Birthday My Love ❤️</h1>
         <button onclick="openLetter()">Open the letter 💌</button>
     </div>
-
     <div class="letter" id="letter">
         <div class="close" onclick="closeLetter()">✖</div>
         <h2>✨ For You ✨</h2>
@@ -228,70 +234,71 @@ button:hover{
             I love you infinitely 💖
         </p>
     </div>
+</div>
 
+<!-- Lecteur musique visible -->
+<div class="music-player" id="musicPlayer" onclick="toggleMusic()">
+    <div class="icon">🎵</div>
+    <span id="musicText">Démarrer la musique</span>
 </div>
 
 <script>
-
-// MUSIQUE : Cheb Hasni - Khatfate galbi
-// Démarre à 0:34 comme demandé
 let audio = null;
-let musicStarted = false;
+let isPlaying = false;
 
-function playMusic() {
-    if (!musicStarted) {
-        // Créer un élément audio YouTube intégré
-        // On utilise l'API YouTube pour démarrer à 34 secondes
-        let iframe = document.createElement('iframe');
-        iframe.src = "https://www.youtube.com/embed/9DJcY1wreM4?autoplay=1&start=34&loop=1&playlist=9DJcY1wreM4";
-        iframe.style.position = "absolute";
-        iframe.style.bottom = "10px";
-        iframe.style.right = "10px";
-        iframe.style.width = "1px";
-        iframe.style.height = "1px";
-        iframe.style.border = "none";
-        iframe.style.opacity = "0";
-        iframe.style.pointerEvents = "none";
-        document.body.appendChild(iframe);
-        musicStarted = true;
-        
-        // Message dans la console pour vérifier que ça fonctionne
-        console.log("Musique lancée : Cheb Hasni - Khatfate galbi (démarrage à 0:34)");
+function initAudio() {
+    if (!audio) {
+        audio = new Audio();
+        // Nom du fichier exact comme tu l'as donné
+        audio.src = "./Cheb Hasni - Khatfate galbi الشاب حسني.mp3";
+        audio.loop = true;
+        audio.volume = 0.6;
+    }
+}
+
+function toggleMusic() {
+    initAudio();
+    const musicText = document.getElementById('musicText');
+    
+    if (!isPlaying) {
+        audio.play().then(() => {
+            isPlaying = true;
+            // Démarre à 34 secondes
+            audio.currentTime = 34;
+            musicText.innerHTML = "Musique en cours... 🎵";
+        }).catch(error => {
+            console.log("Erreur:", error);
+            musicText.innerHTML = "Clique ici pour lancer ❤️";
+        });
+    } else {
+        audio.pause();
+        isPlaying = false;
+        musicText.innerHTML = "Reprendre la musique ⏸️";
     }
 }
 
 function openLetter(){
-    const letter = document.getElementById("letter");
-    letter.classList.add("show");
-    playMusic();
+    document.getElementById("letter").classList.add("show");
 }
 
 function closeLetter(){
-    const letter = document.getElementById("letter");
-    letter.classList.remove("show");
+    document.getElementById("letter").classList.remove("show");
 }
 
 /* ÉTOILES QUI TOMBENT */
 const starList = ['⭐', '🌟', '✨', '⭐', '💫', '🌟', '✨', '⭐', '💫', '✨'];
-
 for(let i=0; i<65; i++){
-
     let star = document.createElement("div");
     star.classList.add("star-falling");
-    
     let randomStar = starList[Math.floor(Math.random() * starList.length)];
     star.innerHTML = randomStar;
-    
     star.style.left = Math.random() * 100 + "vw";
     star.style.fontSize = (Math.random() * 20 + 10) + "px";
     star.style.animationDuration = (Math.random() * 7 + 4) + "s";
     star.style.animationDelay = (Math.random() * 12) + "s";
     star.style.opacity = Math.random() * 0.6 + 0.2;
-    
     document.body.appendChild(star);
 }
-
 </script>
-
 </body>
 </html>
