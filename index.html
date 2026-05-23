@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Happy Birthday ❤️</title>
 <style>
 
@@ -25,12 +25,12 @@ body{
     height:100vh;
 }
 
-/* IMAGE */
+/* IMAGE - Version téléphone (format vertical) */
 .bg{
     position:absolute;
     width:100%;
     height:100%;
-    object-fit: contain;
+    object-fit: cover;  /* Change: cover au lieu de contain */
     object-position: center;
     background:black;
 }
@@ -45,7 +45,7 @@ body{
 /* CONTENU */
 .center{
     position:absolute;
-    top: 25%;
+    top: 20%;  /* Un peu plus haut pour téléphone */
     left:50%;
     transform:translate(-50%, -50%);
     text-align:center;
@@ -56,7 +56,7 @@ body{
 /* TEXTE */
 .center h1{
     color: #E8E8E8;
-    font-size: 2.5rem;
+    font-size: 2rem;  /* Un peu plus petit pour mobile */
     margin-bottom:20px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.7), 0 0 12px rgba(255,255,255,0.3);
     letter-spacing: 2px;
@@ -71,7 +71,7 @@ button{
     border-radius:50px;
     background: rgba(0,0,0,0.5);
     color: #E0E0E0;
-    font-size:1rem;
+    font-size:0.9rem;
     cursor:pointer;
     transition:0.3s;
     backdrop-filter: blur(4px);
@@ -94,7 +94,7 @@ button:hover{
     transform:translate(-50%,-50%) scale(0);
     width:90%;
     max-width:600px;
-    background: rgba(10, 5, 20, 0.85);
+    background: rgba(10, 5, 20, 0.9);
     backdrop-filter: blur(8px);
     padding:35px;
     border-radius:20px;
@@ -113,14 +113,14 @@ button:hover{
     text-align:center;
     margin-bottom:20px;
     font-family: 'Courier New', monospace;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     letter-spacing: 2px;
 }
 
 .letter p{
     color:#D0D0D0;
     line-height:1.8;
-    font-size:1rem;
+    font-size:0.9rem;
     font-family: 'Segoe UI', monospace;
     text-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
@@ -144,7 +144,7 @@ button:hover{
 .star-falling{
     position:absolute;
     bottom:-50px;
-    font-size: 20px;
+    font-size: 18px;
     animation:floatStar linear infinite;
     pointer-events: none;
     z-index: 5;
@@ -171,11 +171,11 @@ button:hover{
     background:rgba(0,0,0,0.7);
     backdrop-filter:blur(10px);
     border-radius:50px;
-    padding:10px 20px;
+    padding:8px 16px;
     border:1px solid #C0C0C0;
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:10px;
     cursor:pointer;
     transition:0.3s;
 }
@@ -185,26 +185,29 @@ button:hover{
 }
 .music-player span{
     color:#E0E0E0;
-    font-size:0.9rem;
+    font-size:0.8rem;
 }
 .music-player .icon{
-    font-size:1.2rem;
+    font-size:1rem;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE TELEPHONE */
 @media (max-width: 600px) {
-    .center{top:22%;}
-    .center h1{font-size:1.4rem;}
-    button{padding:8px 20px;font-size:0.8rem;}
+    .center{top: 18%;}
+    .center h1{font-size: 1.5rem;}
+    button{padding:10px 24px;font-size:0.8rem;}
     .letter{padding:20px;max-height:80vh;overflow-y:auto;}
     .letter p{font-size:0.85rem;}
     .letter h2{font-size:1.3rem;}
-    .music-player{padding:6px 14px;}
+    .music-player{padding:6px 12px;}
     .music-player span{font-size:0.7rem;}
 }
-@media (min-width: 1200px) {
-    .center{top:28%;}
-    .center h1{font-size:3rem;}
+
+/* Pour très petits écrans */
+@media (max-width: 400px) {
+    .center{top: 15%;}
+    .center h1{font-size: 1.2rem;}
+    button{padding:8px 18px;font-size:0.7rem;}
 }
 </style>
 </head>
@@ -221,19 +224,17 @@ button:hover{
         <div class="close" onclick="closeLetter()">✖</div>
         <h2>✨ For You ✨</h2>
         <p>
-            Happy birthday zin ❤️
+            Happy birthday my love ❤️
             <br><br>
-            Today is a very special day because the most wonderful person in my life is celebrating their birthday.
+            Today is a very special day because the most beautiful person in my life is celebrating her birthday.
             <br><br>
-            Thank you for your smile, your love, your sweetness. Don't worry, the day will come when we'll be together forever. I know you're looking forward to it xd.
+            Thank you for your smile, your love, your sweetness, and all the wonderful moments we share together.
             <br><br>
-            You brighten my life every day, and I'm so happy to have you by my side. Like in this picture, we'll spend nights together gazing at the stars to forget life's worries, because you are the solution.
+            You make my life more beautiful every day and I am so happy to have you in my life.
             <br><br>
-            No matter how much time passes, I will always be by your side 
+            No matter how much time passes, I will always fall in love with you again and again ❤️
             <br><br>
             I love you infinitely 💖
-            <br><br>
-            YOSOO
         </p>
     </div>
 </div>
@@ -251,7 +252,7 @@ let isPlaying = false;
 function initAudio() {
     if (!audio) {
         audio = new Audio();
-        // Nom du fichier exact comme tu l'as donné
+        // Ton fichier MP3
         audio.src = "./Cheb Hasni - Khatfate galbi الشاب حسني.mp3";
         audio.loop = true;
         audio.volume = 0.6;
@@ -265,7 +266,6 @@ function toggleMusic() {
     if (!isPlaying) {
         audio.play().then(() => {
             isPlaying = true;
-            // Démarre à 34 secondes
             audio.currentTime = 34;
             musicText.innerHTML = "Musique en cours... 🎵";
         }).catch(error => {
@@ -289,13 +289,13 @@ function closeLetter(){
 
 /* ÉTOILES QUI TOMBENT */
 const starList = ['⭐', '🌟', '✨', '⭐', '💫', '🌟', '✨', '⭐', '💫', '✨'];
-for(let i=0; i<65; i++){
+for(let i=0; i<55; i++){
     let star = document.createElement("div");
     star.classList.add("star-falling");
     let randomStar = starList[Math.floor(Math.random() * starList.length)];
     star.innerHTML = randomStar;
     star.style.left = Math.random() * 100 + "vw";
-    star.style.fontSize = (Math.random() * 20 + 10) + "px";
+    star.style.fontSize = (Math.random() * 18 + 10) + "px";
     star.style.animationDuration = (Math.random() * 7 + 4) + "s";
     star.style.animationDelay = (Math.random() * 12) + "s";
     star.style.opacity = Math.random() * 0.6 + 0.2;
