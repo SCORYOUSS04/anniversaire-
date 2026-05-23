@@ -25,27 +25,32 @@ body{
     height:100vh;
 }
 
-/* IMAGE - Version téléphone (format vertical) */
+/* IMAGE - Remplit TOUT l'écran sur tous les appareils */
 .bg{
-    position:absolute;
+    position:fixed;
+    top:0;
+    left:0;
     width:100%;
     height:100%;
-    object-fit: cover;  /* Change: cover au lieu de contain */
+    object-fit: cover;  /* L'image couvre tout sans déformation */
     object-position: center;
-    background:black;
 }
 
 /* OVERLAY */
 .overlay{
-    position:absolute;
-    inset:0;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
     background:rgba(0,0,0,0.2);
+    z-index:1;
 }
 
 /* CONTENU */
 .center{
     position:absolute;
-    top: 20%;  /* Un peu plus haut pour téléphone */
+    top: 20%;
     left:50%;
     transform:translate(-50%, -50%);
     text-align:center;
@@ -56,7 +61,7 @@ body{
 /* TEXTE */
 .center h1{
     color: #E8E8E8;
-    font-size: 2rem;  /* Un peu plus petit pour mobile */
+    font-size: 2rem;
     margin-bottom:20px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.7), 0 0 12px rgba(255,255,255,0.3);
     letter-spacing: 2px;
@@ -88,7 +93,7 @@ button:hover{
 
 /* LETTRE */
 .letter{
-    position:absolute;
+    position:fixed;
     top:50%;
     left:50%;
     transform:translate(-50%,-50%) scale(0);
@@ -142,12 +147,12 @@ button:hover{
 
 /* ÉTOILES QUI TOMBENT */
 .star-falling{
-    position:absolute;
+    position:fixed;
     bottom:-50px;
     font-size: 18px;
     animation:floatStar linear infinite;
     pointer-events: none;
-    z-index: 5;
+    z-index: 15;
     filter: drop-shadow(0 0 4px rgba(255,255,255,0.5));
 }
 
@@ -191,7 +196,7 @@ button:hover{
     font-size:1rem;
 }
 
-/* RESPONSIVE TELEPHONE */
+/* RESPONSIVE POUR TOUS LES APPAREILS */
 @media (max-width: 600px) {
     .center{top: 18%;}
     .center h1{font-size: 1.5rem;}
@@ -199,15 +204,19 @@ button:hover{
     .letter{padding:20px;max-height:80vh;overflow-y:auto;}
     .letter p{font-size:0.85rem;}
     .letter h2{font-size:1.3rem;}
-    .music-player{padding:6px 12px;}
-    .music-player span{font-size:0.7rem;}
 }
 
-/* Pour très petits écrans */
 @media (max-width: 400px) {
     .center{top: 15%;}
     .center h1{font-size: 1.2rem;}
     button{padding:8px 18px;font-size:0.7rem;}
+}
+
+@media (min-width: 1200px) {
+    .center{top: 25%;}
+    .center h1{font-size: 3rem;}
+    button{font-size:1.1rem;}
+    .letter p{font-size:1rem;}
 }
 </style>
 </head>
@@ -252,7 +261,6 @@ let isPlaying = false;
 function initAudio() {
     if (!audio) {
         audio = new Audio();
-        // Ton fichier MP3
         audio.src = "./Cheb Hasni - Khatfate galbi الشاب حسني.mp3";
         audio.loop = true;
         audio.volume = 0.6;
